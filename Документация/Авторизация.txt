@@ -1,0 +1,164 @@
+<Page x:Class="TestDem.Pages.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestDem.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1000"
+      Title="AuthPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Grid.Column="3" Height="350" Stroke="Black" Grid.Row="1" VerticalAlignment="Top" Margin="52,10,52,0" Grid.RowSpan="6" Grid.ColumnSpan="5" Fill="White">
+            <Rectangle.Effect>
+                <DropShadowEffect Color="Black" Direction="180" ShadowDepth="8" Opacity="1"  BlurRadius="15"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <TextBlock x:Name="tbl_login" Grid.Column="3" HorizontalAlignment="Left" Margin="74,15,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top" FontSize="22" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="tbl_auth" Grid.Column="4" Margin="48,25,48,0" Grid.Row="1" TextWrapping="Wrap" Text="Авторизация" VerticalAlignment="Top" Grid.ColumnSpan="3" FontSize="26"/>
+
+        <TextBox x:Name="tb_login" HorizontalAlignment="Left" Margin="74,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  Grid.Column="3"  Grid.Row="2" FontSize="18" Width="280" Grid.ColumnSpan="5" BorderThickness="0,0,0,2" BorderBrush="#FFFF4A6B" Grid.RowSpan="2">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Введите логин" Foreground="DimGray"/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+        <TextBlock x:Name="tbl_password" Grid.Column="3" HorizontalAlignment="Left" Margin="74,21,0,0" Grid.Row="3" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" FontSize="22" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="tb_password" HorizontalAlignment="Left" Margin="74,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  Grid.Column="3"  Grid.Row="3" FontSize="18" Width="280" Grid.ColumnSpan="5" BorderThickness="0,0,0,2" Grid.RowSpan="2" BorderBrush="#FFFF4A6B">
+            <TextBox.Style>
+                <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Введите пароль" Foreground="DimGray"/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+        <Button x:Name="bt_compare" Grid.Column="4" Content="Вход" Margin="12,16,8,0" Grid.Row="5" BorderBrush="{x:Null}" Grid.ColumnSpan="3" FontSize="20"  Cursor="Hand" Height="34" VerticalAlignment="Top" Click="bt_compare_Click">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="180" ShadowDepth="8" Opacity="0.5"  BlurRadius="15"/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="bt_guest" Grid.Column="4" Content="Войти как гость" Margin="12,5,8,0" Grid.Row="6" BorderBrush="{x:Null}" Grid.ColumnSpan="3" FontSize="20"  Cursor="Hand" Height="34" VerticalAlignment="Top">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="180" ShadowDepth="8" Opacity="0.5"  BlurRadius="15"/>
+            </Button.Effect>
+        </Button>
+    </Grid>
+</Page>
+
+public partial class AuthPage : Page
+    {
+        public AuthPage()
+        {
+            InitializeComponent();
+        }
+
+        private void bt_compare_Click(object sender, RoutedEventArgs e)
+        {
+            string login = tb_login.Text;
+            string password = tb_password.Text;
+
+            Entities db = Helper.GetContext();
+
+            if (TblIsNotEmpty()) {
+                MessageBox.Show("Заполните все поля", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else 
+            {
+                var user = db.Authorization.Where(x => x.Login == login && x.Password == password).FirstOrDefault();
+                if (user != null)
+                {
+                    Auth(user);
+                }
+                else
+                {
+                    MessageBox.Show("Неверный логин или пароль", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
+        private void Auth(Authorization user) 
+        {
+            ClearText();
+            MessageBox.Show($"Успешная авторизация {user.Login}", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            //NavigationService.Navigate();
+            //MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void ClearText() 
+        {
+            tb_login.Text = string.Empty;
+            tb_password.Text = string.Empty;
+        }
+
+        private bool TblIsNotEmpty() 
+        {
+            if (tb_login.Text == string.Empty || tb_password.Text == string.Empty)
+            {
+                return true;
+            }
+            else { return false; }
+        }
+    }
