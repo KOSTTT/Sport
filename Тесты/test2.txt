@@ -1,0 +1,96 @@
+Определить наборы входных данных и выполнить функциональное тестирование модуля по определенному сценарию. Провести тестирование для проверки функциональности программы (хотя бы 1 тест на 1 функцию). Использовать инструментальные средства для тестирования. Представить результаты тестирования в виде протокола тестирования, в соответствии со стандартами.
+
+1. Подготовка проекта к тестированию
+Создайте проект для тестов:
+
+В Visual Studio создайте новый проект типа Unit Test Project:
+В меню File выберите New > Project.
+В окне Create a new project выберите Unit Test Project и нажмите Next.
+Дайте имя проекту и нажмите Create.
+Добавьте ссылку на основной проект:
+
+В окне Solution Explorer правой кнопкой мыши щелкните по проекту с тестами.
+Выберите Add > Reference.
+В окне Reference Manager выберите основной проект и нажмите OK.
+
+Пример протокола тестирования
+markdown
+Копировать код
+# Протокол тестирования
+
+## Описание тестов
+
+### Функция: Calculate
+- **Описание**: Функция принимает число и возвращает его удвоенное значение.
+- **Тестовые данные**: Входное значение 21, ожидаемый результат 42.
+
+## Результаты тестов
+
+### Тест 1: CalculateFunction
+![Результаты теста CalculateFunction](path/to/screenshot1.png)
+- **Описание**: Тест прошел успешно. Входное значение 21, результат 42 соответствует ожидаемому значению.
+
+## Выводы
+
+Все тесты прошли успешно, функции модуля работают корректно в соответствии с заданными сценариями.
+
+namespace UnitTestProject1
+{
+    [TestClass]
+    public class UnitTest1
+    {
+        [TestMethod]
+        public void TestMethod1()
+        {
+            demEntities db = Helper.GetContext();
+            int expecrted = 2;
+            int result = Stats.GetCountComplTask(db);
+
+            Assert.AreEqual(expecrted, result);
+        }
+
+        [TestMethod]
+        public void TestMethodAvgTime()
+        {
+            demEntities db = Helper.GetContext();
+            double expecrted = 4272;
+            double result = Stats.GetAvgTime(db);
+
+            Assert.AreEqual(expecrted, result);
+        }
+
+        [TestMethod]
+        public void GetProblemStats()
+        {
+            demEntities db = Helper.GetContext();
+
+            var expectedProblemDescription = "fgdfgdfg";
+            var expectedCount = 1;
+            var expectedStats = new List<object>
+            {
+                new { ProblemDescription = "fgdfgdfg", Count = 1 },
+                new { ProblemDescription = "Выключается сам по себе", Count = 1 },
+                new { ProblemDescription = "Не охлаждает воздух", Count = 1 },
+                new { ProblemDescription = "Не работает она", Count = 1 },
+                new { ProblemDescription = "Не увлажняет", Count = 1 },
+                new { ProblemDescription = "Пар имеет неприятный запах", Count = 1 },
+                new { ProblemDescription = "Увлажнитель воздуха продолжает работать при предельном снижении уровня воды", Count = 1 }
+            };
+
+            var actualStats = Stats.GetProblemStats(db);
+            bool itemFound = false;
+            foreach (var item in actualStats)
+            {
+                var problemDescription = item.GetType().GetProperty("ProblemDescription").GetValue(item, null);
+                var count = (int)item.GetType().GetProperty("Count").GetValue(item, null);
+
+                if (problemDescription.ToString() == expectedProblemDescription && count == expectedCount)
+                {
+                    itemFound = true;
+                    break;
+                }
+            }
+            Assert.IsTrue(itemFound, $"Expected item with ProblemDescription '{expectedProblemDescription}' and Count '{expectedCount}' was not found.");
+        }       
+    }
+}
